@@ -1,12 +1,12 @@
 import express from "express";
 import mongoose from "mongoose";
-import { MONGODB_URL } from "./config";
+import { MONGODB_URL, JWT_SECRET } from "./config";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import { userModel } from "./db";
 dotenv.config();
 const app = express();
-
+import 'dotenv/config'
 app.use(express.json())
 
 app.post("/api/v1/signup", async function(req, res){
