@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-const {MONGODB_URL} = require("./config")
+import { MONGODB_URL } from "./config";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import { userModel } from "./db";
@@ -12,15 +12,27 @@ app.use(express.json())
 app.post("/api/v1/signup", async function(req, res){
     const { username, email, password } = req.body;
 
-    await userModel.create({
-        username:username,
-        email:email,
-        password:password
+    
+    const user = await userModel.findOne({
+        email:email
     })
 
-    res.json({
-        message: "You are signed up"
-    })
+    if(user){
+        res.status(403).json({
+            message: "User with this email already exists"
+        })
+    }else{
+        const hashedpass = await bcrypt.hash(password, 5);
+        await userModel.create({
+            username:username,
+            email:email,
+            password:hashedpass
+        })
+
+        res.json({
+            message: "You are signed up"
+        })
+    }
 });
 
 app.post("/api/v1/login", function(req, res){
@@ -48,7 +60,7 @@ app.get("/api/v1/brain/:shareLink", function(req, res){
 });
 
 async function main() {
-    await mongoose.connect("mongodb+srv://DB1-practice:R5Y71dLhNLahIA3r@cluster0.gpxo7.mongodb.net/Brainly")
+    await mongoose.connect(MONGODB_URL)
     console.log("Connected")
     app.listen(3000);
     console.log("listening on port 3000")
