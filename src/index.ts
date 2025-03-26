@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import { MONGODB_URL, JWT_SECRET } from "./config";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
-import { userModel } from "./db";
+import { contentModel, userModel } from "./db";
 dotenv.config();
 const app = express();
 import 'dotenv/config'
@@ -74,10 +74,19 @@ app.post("/api/v1/login", async function(req, res){
 
 });
 
-app.post("/api/v1/content", middleware, function(req, res){
+app.post("/api/v1/content", middleware, async function(req, res){
+    const userId = req.userId;
+    const { title, link, type, tags} = req.body;
+
+    await contentModel.create({
+        title,
+        link,
+        type,
+        tags,
+        userId
+    })
     res.json({
-        message: "reached",
-        id: req.userId
+        message: "Content Added Successfully"
     })
 });
 
