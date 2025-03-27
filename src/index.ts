@@ -4,11 +4,13 @@ import jwt from "jsonwebtoken";
 import { MONGODB_URL, JWT_SECRET } from "./config";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
-import { contentModel, userModel } from "./db";
+import { contentModel, linkModel, userModel } from "./db";
 dotenv.config();
 const app = express();
 import 'dotenv/config'
 import { middleware } from "./middleware";
+import { link } from "fs";
+import { hashGenerator } from "./hashGenerator";
 app.use(express.json())
 
 app.post("/api/v1/signup", async function(req, res){
@@ -90,20 +92,94 @@ app.post("/api/v1/content", middleware, async function(req, res){
     })
 });
 
-app.get("/api/v1/content", middleware, function(req, res){
-
+app.get("/api/v1/content", middleware, async function(req, res){
+    const userId = req.userId;
+    const contents = await contentModel.find({
+        userId: userId
+    })
+    if(contents){
+        res.json({
+            contents: contents
+        })
+    }else{
+        res.json({
+            message: "No content"
+        })
+    }
 });
 
-app.delete("/api/v1/content", middleware, function(req, res){
+app.delete("/api/v1/content", middleware, async function(req, res){
+    const userId = req.userId;
+    const contentId = req.body.contentId;
 
+    await contentModel.deleteMany({
+        userId: userId,
+        _id: contentId
+    })
+
+    res.json({
+        message: "Content deleted"
+    })
 });
 
-app.post("/api/v1/brain/share", middleware, function(req, res){
-
+app.post("/api/v1/brain/share", middleware, async function(req, res){
+    const share = req.body.share;
+    const userId = req.userId;
+    
+    if(share){
+        const existingLink = await linkModel.findOne({
+            userId: userId
+        })
+        if(existingLink){
+            res.json({
+                link: "http://localhost:3000/api/v1/brain/"+existingLink.hash
+            })
+            return;
+        }else{
+            const hash = hashGenerator();
+            await linkModel.create({
+                hash: hash,
+                userId: userId
+            })
+            res.json({
+                link: "http://localhost:3000/api/v1/brain/"+hash
+            })
+        }
+    }else{
+        await linkModel.deleteOne({
+            userId: userId
+        })
+    }
 });
 
-app.get("/api/v1/brain/:shareLink", function(req, res){
-
+app.get("/api/v1/brain/:shareLink", async function(req, res){
+    const hash = req.params.shareLink;
+    const link = await linkModel.findOne({
+        hash
+    })
+    if(!link){
+        res.json({
+            message: "Incorrect Link"
+        })
+        return;
+    }
+    const userId = link.userId
+    const user = await userModel.findOne({
+        _id: userId
+    })
+    if(!user){
+        res.json({
+            message: "User doesn't exist"
+        })
+        return;
+    }
+    const contents= await contentModel.find({
+        userId: userId
+    })
+    res.json({
+        username: user.username,
+        contents: contents
+    })
 });
 
 async function main() {

@@ -21,7 +21,7 @@ const tagsSchema = new Schema({
 
 const linkSchema = new Schema({
     hash: {type:String, required:true},
-    userID: {type:Types.ObjectId, ref:"Users", required:true}
+    userId: {type:Types.ObjectId, ref:"Users", required:true}
 })
 
 export const userModel = model("Users",userSchema);
