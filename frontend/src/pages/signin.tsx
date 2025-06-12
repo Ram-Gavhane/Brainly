@@ -22,19 +22,22 @@ export function Signin(){
         const token = response.data.token;
         localStorage.setItem("token",token);
         alert(JSON.stringify(response.data.message));
-        navigate("/dashboard");
+        if(token!=undefined){
+            navigate("/dashboard");
+        }
+        
     }
 
-    return <div className="h-screen w-screen flex justify-center items-center">
-        <div className="h-80 w-80 border shadow-md rounded-xl p-8">
+    return <div className="h-screen w-screen flex justify-center items-center bg-[#160C28]">
+        <div className="h-80 w-80 border shadow-md rounded-xl p-8 flex-row justify-center bg-white">
             <h1 className="text-center text-3xl mb-6 mt-4">Signin</h1>
             <Input type="text" placeholder="Username" reference={usernameRef}/>
 
             <Input type="text" placeholder="Password" reference={passwordRef}/>
-            <div className="ml-12 m-3">
-                <Button title="Signin" variant="primary" size="sm" fun={signin}/>
+            <div className="flex m-3 justify-center">
+                <Button title="Signin" variant="primary" size="md" fun={signin}/>
             </div>
-            <h1 className="mt-11 ml-3.5">Don't have an account? <Link to="/signup">Signup</Link></h1>
+            <h1 className="mt-11 ml-3.5">Don't have an account? <Link to="/signup" className="underline">Signup</Link></h1>
         </div>
     </div>
 }
