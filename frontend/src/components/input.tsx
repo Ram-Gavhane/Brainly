@@ -1,12 +1,20 @@
 import { Ref } from "react"
 
-interface inputProps{
+type inputProps={
     type: string,
     placeholder: string,
-    reference: Ref<HTMLInputElement>
+    reference: Ref<HTMLInputElement>,
+    overRidingStyles?: string,
+    size?: "sm"|"md"|"lg"| string
 }
+
+const sizeStyles = {
+  sm: "h-9 px-3 text-sm",
+  md: "h-10 px-5 text-base",
+  lg: "h-12 px-6 text-lg"
+};
+
 export function Input(props: inputProps){
-    return <div className="border w-60 h-9 mt-3 rounded-md ml-2">
-        <input ref={props.reference} className="w-60 h-9 rounded-md px-2" type={props.type} placeholder={props.placeholder} />
-    </div>
+    return  <input ref={props.reference} className={`border h-9 rounded-md px-2 ml-2 ${props.overRidingStyles} ${sizeStyles[props.size]}`} type={props.type} placeholder={props.placeholder} />
+    
 }

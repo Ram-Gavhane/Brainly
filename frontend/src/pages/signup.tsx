@@ -22,16 +22,18 @@ export function Signup(){
             password
         })
 
-        alert(JSON.stringify(response.data));
         navigate("/signin")
     }
 
     return <div className="h-screen w-screen flex justify-center items-center bg-[#160C28]">
         <div className="h-96 w-80 border shadow-md rounded-xl p-8 bg-white">
             <h1 className="text-center text-3xl mb-6 mt-4">Signup</h1>
-            <Input type="text" placeholder="Username" reference={usernameRef}/>
-            <Input type="text" placeholder="Email" reference={emailRef}/>
-            <Input type="text" placeholder="Password" reference={passwordRef}/>
+            <div className="flex flex-col gap-3">
+                <Input type="text" placeholder="Username" reference={usernameRef}/>
+                <Input type="text" placeholder="Email" reference={emailRef}/>
+                <Input type="text" placeholder="Password" reference={passwordRef}/>
+            </div>
+            
             <div className="flex justify-center m-3">
                 <Button title="Signup" variant="primary" size="md" fun={signup}/>
             </div>

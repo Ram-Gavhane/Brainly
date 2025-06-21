@@ -1,12 +1,17 @@
-import { useState } from "react";
-import { SideBarIcon } from "../assets/sidebarIcon";
-import { Button } from "../components/button";
-import { SideBar } from "../components/sideBar";
-import { Card } from "../components/card";
+import { useRecoilValue } from "recoil"
+import { modal } from "../utils/state"
+import { Modal } from "../components/modal";
+
 
 export function Dashboard(){
+    
+    const modalValue = useRecoilValue(modal);
+
     return <div className="bg-[#160C28] text-[#EFCB68] h-[96vh]">
-        <br />
-        <Button variant="secondary" size="sm" title="Click" fun={()=>{}}/>
+        
+        <div className="h-[96vh] flex justify-center items-center">
+            {modalValue && <Modal></Modal>}
+        </div>
+        
     </div>
 }
