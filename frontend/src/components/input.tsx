@@ -5,7 +5,7 @@ type inputProps={
     placeholder: string,
     reference: Ref<HTMLInputElement>,
     overRidingStyles?: string,
-    size?: "sm"|"md"|"lg"| string
+    size: "sm"|"md"|"lg";
 }
 
 const sizeStyles = {

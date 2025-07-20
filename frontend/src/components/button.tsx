@@ -11,7 +11,7 @@ interface ButtonProps {
 const variantStyles = {
   primary: "bg-[#160C28] text-[#EFCB68]",
   secondary: "text-[#160C28] bg-[#EFCB68]",
-  onlyIcon: "text-gray-600 bg-transparent"
+  onlyIcon: "text-[#160C28] bg-transparent"
 };
 
 const sizeStyles = {

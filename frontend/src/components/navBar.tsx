@@ -2,7 +2,7 @@ import { AddIcon } from "../assets/addIcon";
 import { ShareIcon } from "../assets/shareIcon";
 import { Button } from "./button";
 import { useRecoilState } from "recoil";
-import { modal } from "../utils/state";
+import { modal } from "../utils/modalState";
 
 export function Navbar(){
 
@@ -17,6 +17,7 @@ export function Navbar(){
                 setModalValue(modalValue=> modalValue=!modalValue);
                 console.log(modalValue)
             }} title="Add" startSymbol={<AddIcon/>}/>
-            <Button variant="primary" size="md" fun={()=>{}} title="Share Brain" startSymbol={<ShareIcon/>}/></div>
+            <Button variant="primary" size="md" fun={()=>{}} title="Share Brain" startSymbol={<ShareIcon/>}/>
+        </div>
     </div>
 }
