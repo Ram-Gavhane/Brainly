@@ -86,7 +86,8 @@ app.post("/api/v1/content", middleware, async function(req, res){
     await contentModel.create({
         title,
         link,
-        tags,
+        type,
+        tags:[],
         userId
     })
     res.json({

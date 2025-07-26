@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { Button } from "./button"
 import { Input } from "./input"
 import axios from "axios";
@@ -6,19 +6,29 @@ import { CrossIcon } from "../assets/crossIcon";
 import { useRecoilState } from "recoil";
 import { modal } from "../utils/modalState";
 
+enum ContentType {
+  Youtube = "youtube",
+  Twitter = "twitter",
+  Doc = "doc"
+}
+
 export function Modal({}){
-    const contentRef = useRef<HTMLInputElement>(null);
+    const titleRef = useRef<HTMLInputElement>(null);
+    const linkRef = useRef<HTMLInputElement>(null);
     const tagRef = useRef<HTMLInputElement>(null);
     const [modalValue,setModalValue] = useRecoilState(modal);
+    const [type, setType] = useState<ContentType | null>(null);
+
     async function addContent() {
-        const link = contentRef.current?.value;
+        const title = titleRef.current?.value;
+        const link = linkRef.current?.value;
         const response = await axios.post("http://localhost:3000/api/v1/content",{
-            title:"A video that is good",
+            title,
             link,
-            tags:Object("67e3b6dc0acbe17ec9d452cf")
+            type
         },{headers:{
             Authorization:localStorage.getItem("token")
-        }})
+        }});
         setModalValue(false);
         console.log(response.data)
     }
@@ -37,7 +47,7 @@ export function Modal({}){
       placeholder="Title" 
       type="string" 
       overRidingStyles="bg-white/90 w-full rounded-xl border-0 shadow-sm" 
-      reference={contentRef}
+      reference={titleRef}
     /> 
   </div>
   <div className="flex justify-center mb-6 gap-2">
@@ -46,7 +56,7 @@ export function Modal({}){
       placeholder="Link / URL" 
       type="string" 
       overRidingStyles="bg-white/90 w-full rounded-xl border-0 shadow-sm" 
-      reference={contentRef}
+      reference={linkRef}
     /> 
   </div>
 
@@ -57,21 +67,27 @@ export function Modal({}){
     <div className="grid grid-cols-3 gap-2">
       <Button 
         size="sm" 
-        variant="primary" 
+        variant={type == ContentType.Twitter ? "selected" : "primary"} 
         title="Twitter" 
-        fun={() => {}}
+        fun={() => {
+          setType(ContentType.Twitter);
+        }}
       />
       <Button 
         size="sm" 
-        variant="primary" 
+        variant={type == ContentType.Doc ? "selected" : "primary"} 
         title="Docs" 
-        fun={() => {}}
+        fun={() => {
+          setType(ContentType.Doc);
+        }}
       />
       <Button 
         size="sm" 
-        variant="primary" 
+        variant={type == ContentType.Youtube ? "selected" : "primary"} 
         title="YouTube" 
-        fun={() => {}}
+        fun={() => {
+          setType(ContentType.Youtube);
+        }}
       />
     </div>
 

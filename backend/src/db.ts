@@ -9,8 +9,9 @@ const userSchema = new Schema({
 const contentSchema = new Schema({
     title: {type:String, required:true},
     link: {type: String, required:true},
-    tags: [{type: Types.ObjectId, ref: 'Tags' }],
-    userId: {type: Types.ObjectId, ref: 'Users', required: true },
+    type:String,
+    tags: [{type: mongoose.Types.ObjectId, ref: 'Tags' }],
+    userId: {type: mongoose.Types.ObjectId, ref: 'Users', required: true },
 });
 
 const tagsSchema = new Schema({
@@ -19,7 +20,7 @@ const tagsSchema = new Schema({
 
 const linkSchema = new Schema({
     hash: {type:String, required:true},
-    userId: {type:Types.ObjectId, ref:"Users", required:true}
+    userId: {type:mongoose.Types.ObjectId, ref:"Users", required:true}
 })
 
 export const userModel = model("Users",userSchema);

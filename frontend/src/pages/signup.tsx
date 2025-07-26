@@ -25,7 +25,7 @@ export function Signup(){
         navigate("/signin")
     }
 
-    return <div className="h-screen w-screen flex justify-center items-center bg-[#160C28]">
+    return <div className="h-screen  flex justify-center items-center bg-[#160C28]">
         <div className="h-96 w-80 border shadow-md rounded-xl p-8 bg-white">
             <h1 className="text-center text-3xl mb-6 mt-4">Signup</h1>
             <div className="flex flex-col gap-3">

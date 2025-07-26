@@ -2,7 +2,7 @@ import { ReactElement } from "react"
 
 interface ButtonProps {
   title?: string;
-  variant: "primary" | "secondary" | "onlyIcon";
+  variant: "primary" | "secondary" | "onlyIcon" | "selected";
   size: "sm" | "md" | "lg";
   startSymbol?: ReactElement;
   fun: () => void;
@@ -11,7 +11,8 @@ interface ButtonProps {
 const variantStyles = {
   primary: "bg-[#160C28] text-[#EFCB68]",
   secondary: "text-[#160C28] bg-[#EFCB68]",
-  onlyIcon: "text-[#160C28] bg-transparent"
+  onlyIcon: "text-[#160C28] bg-transparent",
+  selected: "text-[#160C28] bg-[#EFCB68] border-[#160C28] border"
 };
 
 const sizeStyles = {
