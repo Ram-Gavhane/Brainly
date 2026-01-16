@@ -28,11 +28,14 @@ export function Dashboard(){
             }}
         >
             <div
-                className="grid gap-12 place-items-center"
+                className="grid gap-6 place-items-start justify-items-center"
                 style={{
-                    gridTemplateColumns: "repeat(4, minmax(250px, 1fr))",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(280px, 400px))",
                     width: "100%",
+                    maxWidth: "100%",
                     margin: "0 auto",
+                    padding: "0 1rem",
+                    justifyContent: "center",
                 }}
             >
                 {content.map(({ title, link, type }) => (

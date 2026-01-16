@@ -10,9 +10,9 @@ export default function TweetCard({ tweetUrl }: { tweetUrl: string }) {
   }, [tweetUrl]);
 
   return (
-    <div className="bg-white p-4 rounded-xl shadow-lg w-fit">
-      <div ref={ref}>
-        <blockquote className="twitter-tweet">
+    <div className="bg-white p-2 rounded-xl shadow-lg w-full max-w-[380px] max-h-[400px] overflow-hidden">
+      <div ref={ref} className="max-w-full max-h-[400px] overflow-hidden" style={{ maxHeight: '400px', overflow: 'hidden' }}>
+        <blockquote className="twitter-tweet" data-width="380" data-dnt="true">
           <a href={tweetUrl}></a>
         </blockquote>
       </div>
