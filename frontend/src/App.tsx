@@ -4,8 +4,8 @@ import './App.css'
 import { Signup } from './pages/signup'
 import { Signin } from './pages/signin'
 import { Dashboard } from './pages/dashboard'
-import { Navbar } from './components/navBar'
 import { Layout } from './pages/layout'
+import { Test } from './pages/test'
 
 function App() {
 
@@ -16,6 +16,7 @@ function App() {
           <Route path='/signup' element={<Signup />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/test' element={<Test/>} />
         </Route>
       </Routes>
     </BrowserRouter>

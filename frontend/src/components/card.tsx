@@ -1,3 +1,5 @@
+import TweetCard from "./tweetCard";
+
 export function Card({title, link, type}:{
     title: string,
     link: string,
@@ -18,7 +20,8 @@ export function Card({title, link, type}:{
             }
 
             // Twitter (you may need Twitter widget SDK instead of iframe)
-            if (u.hostname.includes("twitter.com")) {
+            if (u.hostname.includes("x.com")) {
+                url = url.replace("x.com","twitter.com")
                 return url; // Handle differently below
             }
         }catch{
@@ -38,10 +41,9 @@ export function Card({title, link, type}:{
           title="Embedded content"
           allowFullScreen
         />
-      ) : link.includes("twitter.com") ? (
-        <blockquote className="twitter-tweet">
-          <a href={link}></a>
-        </blockquote>
+      ) : link.includes("x.com") ? (
+        <TweetCard tweetUrl={embedUrl || link} />
+
       ) : (
         <p>Cannot embed this URL</p>
       )}
