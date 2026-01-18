@@ -34,7 +34,7 @@ export function Modal({}){
     }
 
     return (
-      <div className="bg-gray-600/45 h-screen w-screen fixed top-0 flex items-center justify-center">
+      <div className="bg-gray-600/50 h-screen w-screen fixed top-0 flex items-center justify-center">
         <div className="h-[420px] w-[360px] bg-[#EFCB68] rounded-2xl text-[#160C28] flex flex-col p-6 shadow-2xl">
   
   <div className="border-b mb-4 flex justify-between font-semibold items-center gap-2">
