@@ -107,8 +107,6 @@ export function Modal({}){
       />
     </div>
   </div>
-
-  {/* Submit Section */}
   <div className="flex justify-center pt-4 border-t mt-4 border-[#160C28]/10">
     <Button 
       title="Submit Content" 

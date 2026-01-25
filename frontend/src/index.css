@@ -1,24 +1,77 @@
 @import "tailwindcss";
 
-/* Card size constraints */
+/* Card size constraints - flexible for bento grid */
 .card-container {
-  max-width: 300px;
-  max-height: 400px;
   overflow: hidden;
+  /* height: 100%; removed for masonry */
+  /* min-height: 100%; removed for masonry */
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
-/* Twitter embed size constraints */
-.twitter-tweet,
+/* Ensure grid items fill their cells */
+.bento-grid > div {
+  min-height: 0;
+  display: flex;
+}
+
+/* Bento grid responsive adjustments - optimized for density */
+@media (max-width: 640px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .bento-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .bento-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (min-width: 1440px) {
+  .bento-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Twitter embed size constraints - compact and responsive */
+.twitter-tweet {
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
 .twitter-tweet iframe {
-  max-width: 380px !important;
-  max-height: 400px !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
   overflow: hidden !important;
+  border-radius: 8px !important;
 }
 
 /* Text truncation utility */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
