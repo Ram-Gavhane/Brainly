@@ -15,6 +15,17 @@ const sizeStyles = {
 };
 
 export function Input(props: inputProps){
-    return  <input ref={props.reference} className={`border h-9 rounded-md px-2 ml-2 ${props.overRidingStyles} ${sizeStyles[props.size]}`} type={props.type} placeholder={props.placeholder} />
+    return  <input 
+        ref={props.reference} 
+        className={`
+            w-full border border-gray-300 rounded-lg px-4 py-2 
+            bg-white text-gray-900 placeholder-gray-500
+            focus:outline-none focus:ring-2 focus:ring-[#EFCB68] focus:border-transparent
+            transition-all duration-200
+            ${props.overRidingStyles} ${sizeStyles[props.size]}
+        `} 
+        type={props.type} 
+        placeholder={props.placeholder} 
+    />
     
 }

@@ -57,16 +57,27 @@ export function Navbar(){
         </div>
 
         <div className="flex gap-4 items-center">
+
             {isLoggedIn ? (
                 <>
-                    <Button variant="primary" size="md" fun={()=>{
-                        setModalValue(val => !val);
-                    }} title="Add Content" startSymbol={<AddIcon/>}/>
-                    <Button variant="secondary" size="md" fun={()=>{}} title="Share Brain" startSymbol={<ShareIcon/>}/>
+                    <Button 
+                        variant="primary" 
+                        size="md" 
+                        fun={()=>{ setModalValue(val => !val); }} 
+                        title="Add Content" 
+                        startSymbol={<AddIcon/>}
+                    />
+                    <Button 
+                        variant="secondary" 
+                        size="md" 
+                        fun={()=>{}} 
+                        title="Share Brain" 
+                        startSymbol={<ShareIcon/>}
+                    />
                     
                     <div className="relative ml-2" ref={dropdownRef}>
                         <div 
-                            className="bg-[#160C28] text-[#EFCB68] p-2 rounded-full cursor-pointer hover:scale-105 transition-transform"
+                            className="bg-[#160C28] text-[#EFCB68] p-2 rounded-full cursor-pointer hover:bg-[#160C28]/80 transition-colors border border-[#EFCB68]/20"
                             onClick={() => setShowLogout(!showLogout)}
                         >
                             <ProfileIcon/>
@@ -76,18 +87,18 @@ export function Navbar(){
                 </>
             ) : (
                 <div className="flex gap-4">
-                     <button 
-                        onClick={() => navigate("/signin")}
-                        className="text-[#160C28] font-semibold hover:text-[#160C28]/70 transition-colors"
-                     >
-                        Login
-                     </button>
-                     <button 
-                        onClick={() => navigate("/signup")}
-                        className="bg-[#160C28] text-[#EFCB68] px-5 py-2 rounded-lg font-semibold hover:bg-[#160C28]/90 transition-transform active:scale-95 shadow-md"
-                     >
-                        Join Now
-                     </button>
+                     <Button 
+                        variant="ghost"
+                        size="md"
+                        title="Login"
+                        fun={() => navigate("/signin")}
+                     />
+                     <Button 
+                        variant="primary"
+                        size="md"
+                        title="Join Now"
+                        fun={() => navigate("/signup")}
+                     />
                 </div>
             )}
         </div>

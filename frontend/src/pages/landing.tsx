@@ -8,10 +8,10 @@ export function Landing() {
         <div className="bg-[#160C28] text-[#EFCB68] min-h-[calc(100vh-64px)] w-full">
             {/* Hero Section */}
             <div className="container mx-auto px-6 py-20 lg:py-32 flex flex-col items-center text-center">
-                <h1 className="text-5xl lg:text-7xl font-bold mb-6 tracking-tight bg-gradient-to-r from-[#EFCB68] to-[#F3FF70] text-transparent bg-clip-text">
+                <h1 className="text-4xl lg:text-6xl font-bold mb-6 tracking-tight bg-gradient-to-r from-[#EFCB68] to-[#F3FF70] text-transparent bg-clip-text">
                     Your Second Brain
                 </h1>
-                <p className="text-xl lg:text-2xl text-[#EFCB68]/80 max-w-2xl mb-12 leading-relaxed">
+                <p className="text-lg text-[#EFCB68]/80 max-w-2xl mb-12 leading-relaxed">
                     Store your favorite videos, tweets, and documents in one centralized place. 
                     Never lose track of your digital knowledge again.
                 </p>
