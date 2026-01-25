@@ -6,6 +6,7 @@ interface ButtonProps {
   size: "sm" | "md" | "lg";
   startSymbol?: ReactElement;
   fun: () => void;
+  fullWidth?: boolean;
 }
 
 const variantStyles = {
@@ -26,7 +27,8 @@ export function Button({
   variant,
   size,
   startSymbol,
-  fun
+  fun,
+  fullWidth
 }: ButtonProps) {
   const isOnlyIcon = variant === "onlyIcon";
 
@@ -34,7 +36,7 @@ export function Button({
     <button
       onClick={fun}
       className={`flex items-center justify-center gap-2 rounded-xl font-medium transition-all duration-200 
-        ${variantStyles[variant]} ${sizeStyles[size]}`}
+        ${variantStyles[variant]} ${sizeStyles[size]} ${fullWidth ? 'w-full' : ''}`}
     >
       {startSymbol && (
         <span className="flex items-center justify-center">

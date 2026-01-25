@@ -34,6 +34,11 @@ export function Signin(){
             const token = response.data.token;
             if (token) {
                 localStorage.setItem("token", token);
+                if (username) localStorage.setItem("username", username);
+                
+                // Notify Navbar of auth change
+                window.dispatchEvent(new Event("authChange"));
+                
                 setMessage("Login successful! Redirecting...");
                 // Clear form fields on success
                 if (usernameRef.current) usernameRef.current.value = "";
@@ -66,19 +71,38 @@ export function Signin(){
         }
     }
 
-    return <div className="h-screen flex justify-center items-center bg-[#160C28]">
-        {message && <Response message={message} onClose={() => setMessage("")} />}
-        <div className="h-80 w-80 border shadow-md rounded-xl p-8 flex-row justify-center bg-white">
-            <h1 className="text-center text-3xl mb-6 mt-4">Signin</h1>
-            <div className="flex flex-col gap-3">
-                <Input size="md" type="text" placeholder="Username" reference={usernameRef}/>
-                <Input size="md" type="text" placeholder="Password" reference={passwordRef}/>
+    return (
+        <div className="h-screen flex justify-center items-center bg-gradient-to-br from-[#160C28] to-[#2D1B4E] p-4">
+            {message && <Response message={message} onClose={() => setMessage("")} />}
+            <div className="w-full max-w-sm border border-[#EFCB68]/20 shadow-2xl rounded-2xl p-8 bg-[#160C28]/80 backdrop-blur-md">
+                <div className="text-center mb-8">
+                    <h1 className="text-4xl font-bold text-[#EFCB68] tracking-tight">Welcome Back</h1>
+                    <p className="text-gray-400 mt-2">Sign in to continue to Brainly</p>
+                </div>
+                
+                <div className="flex flex-col gap-4">
+                    <div className="space-y-1">
+                        <Input size="md" type="text" placeholder="Username" reference={usernameRef}/>
+                    </div>
+                    <div className="space-y-1">
+                        <Input size="md" type="text" placeholder="Password" reference={passwordRef}/>
+                    </div>
+                </div>
+                
+                <div className="mt-8">
+                    <Button 
+                        title={!loading ? "Signin" : "Loading..."} 
+                        variant="primary" 
+                        size="md" 
+                        fun={signin}
+                        fullWidth
+                    />
+                </div>
+                
+                <p className="mt-6 text-center text-gray-400 text-sm">
+                    Don't have an account? <Link to="/signup" className="text-[#EFCB68] hover:underline font-semibold">Sign up</Link>
+                </p>
             </div>
-            
-            <div className="flex m-3 justify-center">
-                <Button title={!loading ? "Signin" : "Loading.."} variant="primary" size="md" fun={signin}/>
-            </div>
-            <h1 className="mt-11 ml-3.5">Don't have an account? <Link to="/signup" className="underline">Signup</Link></h1>
         </div>
-    </div>
+    );
 }

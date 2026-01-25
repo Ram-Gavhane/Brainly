@@ -61,19 +61,41 @@ export function Signup(){
         }
     }
 
-    return <div className="h-screen  flex justify-center items-center bg-[#160C28]">
-        {message && <Response message={message} onClose={() => setMessage("")} />}
-        <div className="h-96 w-80 border shadow-md rounded-xl p-8 bg-white">
-            <h1 className="text-center text-3xl mb-6 mt-4">Signup</h1>
-            <div className="flex flex-col gap-3">
-                <Input type="text" placeholder="Username" reference={usernameRef} size="md"/>
-                <Input type="text" placeholder="Email" reference={emailRef} size="md"/>
-                <Input type="text" placeholder="Password" reference={passwordRef} size="md"/>
+    return (
+        <div className="h-screen flex justify-center items-center bg-gradient-to-br from-[#160C28] to-[#2D1B4E] p-4">
+            {message && <Response message={message} onClose={() => setMessage("")} />}
+            <div className="w-full max-w-sm border border-[#EFCB68]/20 shadow-2xl rounded-2xl p-8 bg-[#160C28]/80 backdrop-blur-md">
+                <div className="text-center mb-8">
+                    <h1 className="text-4xl font-bold text-[#EFCB68] tracking-tight">Join Brainly</h1>
+                    <p className="text-gray-400 mt-2">Start building your second brain today</p>
+                </div>
+                
+                <div className="flex flex-col gap-4">
+                    <div className="space-y-1">
+                        <Input size="md" type="text" placeholder="Username" reference={usernameRef}/>
+                    </div>
+                    <div className="space-y-1">
+                        <Input size="md" type="text" placeholder="Email" reference={emailRef}/>
+                    </div>
+                    <div className="space-y-1">
+                        <Input size="md" type="text" placeholder="Password" reference={passwordRef}/>
+                    </div>
+                </div>
+                
+                <div className="mt-8">
+                    <Button 
+                        title={!loading ? "Sign up" : "Creating Account..."} 
+                        variant="primary" 
+                        size="md" 
+                        fun={signup}
+                        fullWidth
+                    />
+                </div>
+                
+                <p className="mt-6 text-center text-gray-400 text-sm">
+                    Already have an account? <Link to="/signin" className="text-[#EFCB68] hover:underline font-semibold">Sign in</Link>
+                </p>
             </div>
-            <div className="flex justify-center m-3">
-                <Button title={!loading ? "Signup" : "Signing up..."} variant="primary" size="md" fun={signup}/>
-            </div>
-            <h1 className="mt-12 ml-3.5">Already have an account? <Link to="/signin" className="underline">Signin</Link></h1>
         </div>
-    </div>
+    );
 }
